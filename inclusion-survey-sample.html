@@ -1,0 +1,235 @@
+<!-- You must include this JavaScript file -->
+<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+<!-- The CSS style below hides the <div class="conditionalQuestions"> and all the content within from being shown when the pages load -->
+<style>
+    .conditionalQuestions {
+        display: none;
+    }
+
+</style>
+<!-- All content must be within the <crowd-form> so that your task submits answers to MTurk -->
+<crowd-form>
+    <div class="video-section">
+        <!-- The ${URL} variable below is replaced by content from your CSV file when you upload it.  -->
+        <p>
+            Please click on the link <a href="${URL}" target="_blank">here</a> to open a social media post. Please
+            observe the media content in the post to answer the following question(s).
+            <b>NOTE: This task may require a Facebook or Instagram account to view the media. We're only concerned with the main
+                media of the post. Do not take into consideration any media below any text that states "More posts
+                from..."</b>
+        </p>
+        <!-- These hidden inputs are returned back in the data with the answers the users' submit  -->
+        <input type="hidden" name="url" value="${URL}">
+        <input type="hidden" name="brand" value="${Brand}">
+        <br>
+    </div>
+    <div class="peopleInPost">
+        <p>How many people are in the post? Please note that we define media with partial body parts like hands, arms,
+            legs, as a person.</p>
+            <!-- The `onclick` attribute fires a function called singleChecked() with the parameter "this" being the attributes associated with this input field  -->
+            <input type="radio" id="none" name="persons" value="persons_0" onclick="singleChecked(this)" required>
+            <label for="none">None</label>
+            <!-- The `onclick` attribute fires a function called multipleChecked() with the parameter "this" being the attributes associated with this input field  -->
+        <input type="radio" id="1-person" name="persons" value="persons_1" onclick="multiplechecked(this)" required>
+        <label for="1-person">1</label>
+        <input type="radio" id="2-persons" name="persons" value="persons_2" onclick="multiplechecked(this)">
+        <label for="2-persons">2</label>
+        <input type="radio" id="3-persons" name="persons" value="persons_3" onclick="multiplechecked(this)">
+        <label for="3-persons">3</label>
+        <input type="radio" id="4-persons" name="persons" value="persons_4" onclick="multiplechecked(this)">
+        <label for="4-persons">4</label>
+        <input type="radio" id="5orMore" name="persons" value="persons_5_or_more" onclick="multiplechecked(this)">
+        <label for="5-5orMore">5+</label>
+    </div>
+    <br>
+    <div class="conditionalQuestions">
+        <div class="skintones">
+            <div>
+                <img src="https://suttonderm.com/wp-content/uploads/2016/09/FITZPATRICK-COLOR-CHART.png"
+                    alt="scale of 6 skin tones">
+            </div>
+            <p>Select all the skin tone(s) of the color of people in the post</p>
+            <input type="checkbox" id="skinType1" name="skinType" value="skinType_1">
+            <label for="skinType1">Type 1</label>
+            <input type="checkbox" id="skinType2" name="skinType" value="skinType_2">
+            <label for="skinType2">Type 2</label>
+            <input type="checkbox" id="skinType3" name="skinType" value="skinType_3">
+            <label for="skinType3">Type 3</label>
+            <input type="checkbox" id="skinType4" name="skinType" value="skinType_4">
+            <label for="skinType4">Type 4</label>
+            <input type="checkbox" id="skinType5" name="skinType" value="skinType_5">
+            <label for="skinType5">Type 5</label>
+            <input type="checkbox" id="skinType6" name="skinType" value="skinType_6">
+            <label for="skinType6">Type 6</label>
+        </div>
+        <br>
+        <div class="bodyType">
+            <p>What is the body type(s) in the post? If you cannot determine the body type because the image contains
+                only body parts please leave blank.</p>
+            <div>
+                <img src="https://i.imgur.com/7UUhrPA.png" alt="scale of 4 body types" height="300">
+            </div>
+            <br>
+            <div>
+                <input type="checkbox" id="bodyType_1" name="bodyType" value="bodyType_1">
+                <label for="bodyType_1">Type 1</label>
+                <input type="checkbox" id="bodyType_2" name="bodyType" value="bodyType_2">
+                <label for="bodyType_2">Type 2</label>
+                <input type="checkbox" id="bodyType_3" name="bodyType" value="bodyType_3">
+                <label for="bodyType_3">Type 3</label>
+                <input type="checkbox" id="bodyType_4" name="bodyType" value="bodyType_4">
+                <label for="bodyType_4">Type 4</label>
+            </div>
+        </div>
+        <br>
+        <div class="hair-type">
+            <p>Please select all hair types identified in the media.</p>
+            <div>
+                <img src="https://i.imgur.com/tJlfPz7.png" height="300"
+                    alt="Hair types as classified in Shape Variability and Classification of Human Hair">
+            </div>
+            <br>
+            <div>
+                <input type="checkbox" name="hairType" value="hairType_1" id="hairType_1">
+                <label for="hairType_1">Type 1</label>
+                <input type="checkbox" name="hairType" value="hairType_2" id="hairType_2">
+                <label for="hairType_2">Type 2</label>
+                <input type="checkbox" name="hairType" value="hairType_3" id="hairType_3">
+                <label for="hairType_3">Type 3</label>
+                <input type="checkbox" name="hairType" value="hairType_4" id="hairType_4">
+                <label for="hairType_4">Type 4</label>
+                <input type="checkbox" name="hairType" value="hairType_bald" id="hairType_5">
+                <label for="hairType_5">Bald</label>
+                <input type="checkbox" name="hairType" value="hairType_idk" id="hairType_6">
+                <label for="hairType_6">Cannot Determine</label>
+            </div>
+        </div>
+        <br>
+        <div class="age">
+            <p>Please select what age groups appear in the media.</p>
+            <input type="checkbox" name="age" value="age_child" id="child">
+            <label for="child">Children < 12</label>
+            <input type="checkbox" name="age" value="age_teen" id="teen">
+            <label for="teen">Teenagers (age 12-19)</label>
+            <input type="checkbox" name="age" value="age_young_adult" id="y-adult">
+            <label for="y_adult">Young adult (age 20-39)</label>
+            <input type="checkbox" name="age" value="age_adult" id="adult">
+            <label for="adult">Adult (age 40-59)</label>
+            <input type="checkbox" name="age" value="age_older_adult" id="o-adult">
+            <label for="o_adult">Older Adult (age 60+)</label>
+        </div>
+        <br>
+        <div class="disability">
+            <p>Do any of the people featured in the post have any visible disabilities?</p>
+            <input type="radio" name="disability" value="disability_yes" id="disability_yes">
+            <label for="disability_yes">Yes</label>
+            <input type="radio" name="disability" value="disability_no" id="disability_no">
+            <label for="disability_no">No</label>
+            <input type="radio" id="disability_idk" name="disability" value="disability_idk">
+            <label for="disability_idk">Cannot Determine</label>
+        </div>
+        <br>
+        <div class="gender">
+            <p>What is the gender expression of the person(s)?</p>
+            <input type="checkbox" id="men" name="gender" value="gender_men">
+            <label for="men">Men</label>
+            <input type="checkbox" id="women" name="gender" value="gender_women">
+            <label for="women">Women</label>
+            <input type="checkbox" id="nb" name="gender" value="gender_nb">
+            <label for="nb">Ambiguious/Cannot Determine</label>
+        </div>
+        <br>
+        <div class="affluence">
+            <p>Please rate the affluence/wealth of the people in the post:</p>
+            <input type="checkbox" name="affluence" value="affluence_low" id="affluence_low">
+            <label for="affluence_low">Low Affluence/Wealth</label>
+            <input type="checkbox" name="affluence" value="affluence_mid" id="affluence_mid">
+            <label for="affluence_mid">Mid Affluence/Wealth</label>
+            <input type="checkbox" name="affluence" value="affluence_high" id="affluence_high">
+            <label for="affluence_high">High Affluence/Wealth</label>
+            <input type="checkbox" name="affluence" value="affluence_idk" id="affluence_idk">
+            <label for="affluence_idk">Cannot Determine</label>
+        </div>
+        <br>
+        <div class="attire">
+            <p>Please rate the clothes people are wearing.</p>
+            <input type="checkbox" name="attireStereotype" value="attire_casual" id="attire_casual">
+            <label for="attire_casual">Casual/Informal</label>
+            <input type="checkbox" name="attireStereotype" value="attire_professional" id="attire_professional">
+            <label for="attire_professional">Professional/Formal </label>
+            <input type="checkbox" name="attireStereotype" value="attire_idk" id="attire_idk">
+            <label for="attire_idk">Cannot Determine</label>
+            <input type="checkbox" name="attireStereotype" value="attire_neither" id="attire_neither">
+            <label for="attire_neither">Neither</label>
+        </div>
+        <br>
+        <div class="centralityB">
+            <p>Rate the centrality of the person (or people) in the post:</p>
+            <input type="radio" name="centrality" value="centrality_no" id="centralityN">
+            <label for="centrality_n">The person (or people) are in the background of the message </label>
+            <input type="radio" name="centrality" value="centrality_yes" id="centralityY">
+            <label for="centrality_y">The person (or people) are front and center of the message</label>
+            <input type="radio" name="centrality" value="centrality_idk" id="centralityIDK">
+            <label for="centrality_idk">Cannot Determine</label>
+        </div>
+        <br>
+        <div class="areYouPayingAttention">
+            <p>Please answer the following math question with numbers to validate your answers (e.g. "1 2 3 4 5, etc").</p>
+            <div id="userTest"></div>
+            <input type="text" name="answerUser" id="answerUser">
+            <input type="hidden" name="answerCorrect" id="answerCorrect">
+        </div>
+         <br> <br>
+    </div>
+    <!-- <full-instructions> is an mTurk element that shows a user a dialog box with more instructions when clicked  -->
+        <full-instructions header="Classification Instructions">
+            <p>
+                For questions regarding the foreground or background, please answer based on who is the focus of the image.
+                You may have people in both foreground and background and you can select both when appropriate.
+                For questions regarding <b>body type, skin tone and gender expression</b>, try to tag the closest possible
+                option from the provided lists/reference images.
+                For the question perceiving if the person is a model or real person, answer it based on if you perceive the
+                person(s) are acting or modeling in the media, or if you perceive they look candid, and like average people.
+                If you cannot determine the body type because the image contains only body parts please leave blank.
+                <b>We're only concerned with the main media of the post. Do not take into consideration any media below any
+                    text that states "More posts from..."</b>
+                </p>
+            </full-instructions>
+    <!-- <short-instructions> is an mTurk element that shows a user a side panel with instructions when clicked  -->
+    <short-instructions>
+        <p>Read the task carefully and inspect the image.</p>
+        <p>Choose the appropriate label that best suits the image.</p>
+    </short-instructions>
+</crowd-form>
+<script>
+    // The singleChecked function hides all the elements nested within the <div> with class "conditionalQuestions" when radio button "None" is selected
+        function singleChecked(singlebutton) {
+            var conditionalQuestions = document.querySelector('.conditionalQuestions');
+            if (singlebutton.checked == true) {
+                conditionalQuestions.style.display = 'none';
+            }
+        }
+        
+    // The multiplechecked function shows all the elements nested within the <div> with class "conditionalQuestions" when any button other than "None" is selected 
+    function multiplechecked(radiobutton) {
+        var conditionalQuestions = document.querySelector('.conditionalQuestions');
+        if (radiobutton.checked == true) {
+            conditionalQuestions.style.display = 'block';
+        } else {
+            conditionalQuestions.style.display = 'none';
+        }
+    }
+    // Random Addition Question Generator
+    /*
+     - Generates 2 random numbers and their sum
+     - Shows the user the 2 random numbers
+     - Gets the user's answer to the addition question and puts it in the input to be stored later
+    */ 
+    var rand1 = Math.floor(Math.random() * 9 + 1);
+    var rand2 = Math.floor(Math.random() * 9 + 1);
+    var answer = rand1 + rand2;
+    var userTest = document.getElementById('userTest');
+    userTest.innerHTML = rand1 + " + " + rand2;
+    var correctAnswer = document.getElementById("answerCorrect");
+    correctAnswer.value = answer;
+</script>
